@@ -8,7 +8,7 @@ import {Menu} from '@material-ui/icons';
 import {
     addTodolistAC,
     changeTodolistFilterAC,
-    changeTodolistTitleAC,
+    changeTodolistTitleAC, fetchTodolistsThunk,
     removeTodolistAC, SetTodoListsAC,
     todolistsReducer
 } from './state/todolists-reducer';
@@ -34,11 +34,7 @@ function App() {
     let todolistId2 = v1();
 
     useEffect( () => {
-        todolistAPI.getTodolists()
-            .then( (res) => {
-                // @ts-ignore
-                dispatch(SetTodoListsAC(res.data))
-            })
+        dispatch(fetchTodolistsThunk)
     },[])
 
     const todolists = useSelector<AppRootStateType, Array<TodolistType>>(state => state.todolists)
