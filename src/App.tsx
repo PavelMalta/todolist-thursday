@@ -10,7 +10,14 @@ import {
     changeTodolistFilterAC,
     changeTodolistTitleAC, fetchTodolistsTC,
     removeTodolistAC,} from './state/todolists-reducer';
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from './state/tasks-reducer';
+import {
+    addTaskAC,
+    addTasksTC,
+    changeTaskStatusAC,
+    changeTaskTitleAC,
+    removeTaskAC,
+    updateTasksStatusTC
+} from './state/tasks-reducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './state/store';
 
@@ -45,12 +52,11 @@ function App() {
     }, []);
 
     const addTask = useCallback(function (title: string, todolistId: string) {
-        const action = addTaskAC(title, todolistId);
-        dispatch(action);
+              dispatch(addTasksTC(todolistId, title));
     }, []);
 
     const changeStatus = useCallback(function (id: string, isDone: boolean, todolistId: string) {
-        const action = changeTaskStatusAC(id, isDone, todolistId);
+        const action = updateTasksStatusTC(id, isDone, todolistId);
         dispatch(action);
     }, []);
 

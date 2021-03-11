@@ -53,7 +53,7 @@ export type TaskResponseType = {
     addedDate: string
 }
 
-type UpdateTaskModelType = {
+export type UpdateTaskModelType = {
     title: string
     description: null | string
     status: number
