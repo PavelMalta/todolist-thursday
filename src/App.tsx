@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useReducer, useState} from 'react'
+import React, {useCallback, useEffect} from 'react'
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
@@ -8,14 +8,12 @@ import {Menu} from '@material-ui/icons';
 import {
     addTodolistAC,
     changeTodolistFilterAC,
-    changeTodolistTitleAC, fetchTodolistsThunk,
-    removeTodolistAC, SetTodoListsAC,
-    todolistsReducer
-} from './state/todolists-reducer';
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './state/tasks-reducer';
+    changeTodolistTitleAC, fetchTodolistsTC,
+    removeTodolistAC,} from './state/todolists-reducer';
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from './state/tasks-reducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './state/store';
-import {todolistAPI} from "./api/todolist-api";
+
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodolistType = {
@@ -34,7 +32,7 @@ function App() {
     let todolistId2 = v1();
 
     useEffect( () => {
-        dispatch(fetchTodolistsThunk)
+        dispatch(fetchTodolistsTC())
     },[])
 
     const todolists = useSelector<AppRootStateType, Array<TodolistType>>(state => state.todolists)
